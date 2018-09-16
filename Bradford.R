@@ -1,11 +1,14 @@
+### Bradford Assay R tutorial
+# Ken Field, Bucknell University
+
 ### First enter your data into a data frame 
 
-Concentration <- c(0.2, 0.4, 0.8)
-Absorbance <- c(0.335, 0.630, 1.050)
+Concentration <- c(0, 0.2, 0.4, 0.8)
+Absorbance <- c(0.05, 0.335, 0.630, 1.050)
 Bradford <- data.frame(Concentration, Absorbance)
 
 # Check the contents of the data frame
-Bradford
+summary(Bradford)
 
 # Save the data frame
 write.csv(Bradford, file="Bradford.csv")
@@ -81,8 +84,8 @@ ggplot(Bradford) +
   theme_cowplot() +
   geom_smooth(method=lm)
 
-## Note that with only 3 data points, the confidence in the linear model is very low 
-# and the confidence interval is large. With your real data, hopefully the results will be better.
+## Note that with only 4 data points, the confidence in the linear model not that great 
+# and the confidence interval is large. With more datapoints, hopefully the results will be better.
 # To plot without the confidence intervals:
 ggplot(Bradford) +
   aes(x = Concentration, y = Absorbance) +
@@ -99,4 +102,6 @@ ggplot(Bradford) +
 fit = lm(Absorbance~Concentration, data=Bradford)
 summary(fit)
 
+# This summary includes all of the statistics associated with the linear model fit of the data
 # Intercept represents the y-intercept and the slope is shown as Concentration
+# The Adjusted R-squared value is also shown
